@@ -6,6 +6,8 @@ import (
 	"connect-rpc-sandbox/gen/greet/v1/greetv1connect"
 	"connect-rpc-sandbox/handler/auth"
 	"connect-rpc-sandbox/handler/greet"
+	"connect-rpc-sandbox/middleware"
+	"connectrpc.com/connect"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"net/http"
@@ -13,9 +15,10 @@ import (
 
 func Run(conf *config.Config) {
 	mux := http.NewServeMux()
+	authInterceptor := connect.WithInterceptors(middleware.NewAuthInterceptor())
 
 	greetHandler := greet.NewHandler()
-	mux.Handle(greetv1connect.NewGreetServiceHandler(greetHandler))
+	mux.Handle(greetv1connect.NewGreetServiceHandler(greetHandler, authInterceptor))
 
 	authHandler := auth.NewHandler()
 	mux.Handle(authv1connect.NewAuthServiceHandler(authHandler))

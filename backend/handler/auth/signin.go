@@ -9,6 +9,8 @@ import (
 	"log"
 )
 
+const TokenHeader = "Auth-Token"
+
 type handler struct{}
 
 func NewHandler() authv1connect.AuthServiceHandler {
@@ -23,6 +25,6 @@ func (h *handler) SignIn(
 
 	// TODO: Implement sign in logic
 	res := connect.NewResponse(&authv1.SignInResponse{})
-	res.Header().Set("session_id", ulid.Make().String())
+	res.Header().Set(TokenHeader, ulid.Make().String())
 	return res, nil
 }
