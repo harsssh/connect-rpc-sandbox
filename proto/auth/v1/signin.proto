@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package auth.v1;
+option go_package = "connect-rpc-sandbox/gen/auth/v1;authv1";
+
+message SignInRequest {
+    string user_id = 1;
+    string password = 2;
+}
+
+message SignInResponse {}
+
+service AuthService {
+    rpc SignIn(SignInRequest) returns (SignInResponse);
+}

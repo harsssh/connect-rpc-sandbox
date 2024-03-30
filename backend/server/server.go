@@ -2,7 +2,9 @@ package server
 
 import (
 	"connect-rpc-sandbox/config"
+	"connect-rpc-sandbox/gen/auth/v1/authv1connect"
 	"connect-rpc-sandbox/gen/greet/v1/greetv1connect"
+	"connect-rpc-sandbox/handler/auth"
 	"connect-rpc-sandbox/handler/greet"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
@@ -14,6 +16,9 @@ func Run(conf *config.Config) {
 
 	greetHandler := greet.NewHandler()
 	mux.Handle(greetv1connect.NewGreetServiceHandler(greetHandler))
+
+	authHandler := auth.NewHandler()
+	mux.Handle(authv1connect.NewAuthServiceHandler(authHandler))
 
 	srv := &http.Server{
 		Addr:    conf.Host + ":" + conf.Port,
