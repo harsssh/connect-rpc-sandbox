@@ -2,6 +2,7 @@ version: v1
 plugins:
     - plugin: go
       out: ../backend/gen
+      # gen/ 以下を proto/ と同じ構造にする
       opt: paths=source_relative
     - plugin: connect-go
       out: ../backend/gen
