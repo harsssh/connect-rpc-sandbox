@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+// protobuf のパッケージを指定
+package greet.v1;
+
+// Go のパッケージ名を指定
+option go_package = "connect-rpc-sandbox/gen/greet/v1;greetv1";
+
+message GreetRequest {
+    string name = 1;
+}
+
+message GreetResponse {
+    string message = 1;
+}
+
+service GreetService {
+    rpc Greet(GreetRequest) returns (GreetResponse) {}
+}
