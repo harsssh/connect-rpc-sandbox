@@ -1,4 +1,4 @@
-package handler
+package greet
 
 import (
 	greetv1 "connect-rpc-sandbox/gen/greet/v1"
@@ -9,13 +9,13 @@ import (
 	"log"
 )
 
-type GreetHandler struct{}
+type handler struct{}
 
-func NewGreetHandler() greetv1connect.GreetServiceHandler {
-	return &GreetHandler{}
+func NewHandler() greetv1connect.GreetServiceHandler {
+	return &handler{}
 }
 
-func (h *GreetHandler) Greet(
+func (h *handler) Greet(
 	ctx context.Context,
 	req *connect.Request[greetv1.GreetRequest],
 ) (*connect.Response[greetv1.GreetResponse], error) {
